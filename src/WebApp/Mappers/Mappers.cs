@@ -21,4 +21,11 @@ public static class Mappers
         source.Vehicle.Type,
         source.SelectedCustomerId
     );
+
+    public static RegisterProduct MapToRegisterProduct(this InventoryManagementNewViewModel source) => new RegisterProduct (
+        Guid.NewGuid(),
+        Guid.NewGuid().ToString("N"),
+        source.Product.Name,
+        source.Product.Price
+    );
 }

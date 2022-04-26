@@ -1,0 +1,20 @@
+﻿@model Pitstop.WebApp.ViewModels.InventoryManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Inventory Details";
+}
+<h3 id="PageTitle">Inventory Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">Name :</td>
+            <td><b>@Model.Product.Name</b></td>
+        </tr>
+        <tr>
+            <td width="150">Price :</td>
+            <td><b>@Model.Product.Price</b></td>
+        </tr>
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="InventoryManagement" class="btn btn-default">Back</a></span>
+

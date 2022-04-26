@@ -1,0 +1,26 @@
+﻿@model Pitstop.WebApp.ViewModels.InventoryManagementViewModel
+@{
+    ViewData["Title"] = "Inventory Overview";
+}
+<h3 id="PageTitle">Inventory Management - overview</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "InventoryManagement", new { id = product.ProductId }))'">
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a id="RegisterProductButton" asp-action="New" asp-controller="InventoryManagement" class="btn btn-default">Register product</a>
+
+

@@ -4,7 +4,7 @@
 builder.Host.UseContentRoot(Directory.GetCurrentDirectory());
 
 // setup logging
-builder.Host.UseSerilog((context, logContext) => 
+builder.Host.UseSerilog((context, logContext) =>
     logContext
         .ReadFrom.Configuration(builder.Configuration)
         .Enrich.WithMachineName()
@@ -22,6 +22,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddHttpClient<ICustomerManagementAPI, CustomerManagementAPI>();
 builder.Services.AddHttpClient<IVehicleManagementAPI, VehicleManagementAPI>();
 builder.Services.AddHttpClient<IWorkshopManagementAPI, WorkshopManagementAPI>();
+builder.Services.AddHttpClient<IInventoryManagementAPI, InventoryManagementAPI>();
 
 var app = builder.Build();
 
