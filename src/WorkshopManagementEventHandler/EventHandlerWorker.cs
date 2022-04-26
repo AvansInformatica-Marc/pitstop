@@ -43,6 +43,9 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
                 case "CustomerRegistered":
                     await HandleAsync(messageObject.ToObject<CustomerRegistered>());
                     break;
+                case "ProductRegistered":
+                    await HandleAsync(messageObject.ToObject<ProductRegistered>());
+                    break;
                 case "VehicleRegistered":
                     await HandleAsync(messageObject.ToObject<VehicleRegistered>());
                     break;
@@ -106,6 +109,23 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
         catch (DbUpdateException)
         {
             Log.Warning("Skipped adding customer with customer id {CustomerId}.", e.CustomerId);
+        }
+
+        return true;
+    }
+
+    private async Task<bool> HandleAsync(ProductRegistered e) {
+        Log.Information("Register Product: {ProductId}, {Name}, {Price}", e.ProductId, e.Name, e.Price);
+
+        try {
+            await _dbContext.Products.AddAsync(new Product(
+                e.ProductId,
+                e.Name,
+                e.Price
+            ));
+            await _dbContext.SaveChangesAsync();
+        } catch (DbUpdateException) {
+            Log.Warning("Skipped adding customer with customer id {ProductId}.", e.ProductId);
         }
 
         return true;

@@ -10,6 +10,7 @@ public class WorkshopManagementDBContext : DbContext
 
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Product> Products { get; set; }
     public DbSet<MaintenanceJob> MaintenanceJobs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -19,6 +20,9 @@ public class WorkshopManagementDBContext : DbContext
 
         builder.Entity<Customer>().HasKey(entity => entity.CustomerId);
         builder.Entity<Customer>().ToTable("Customer");
+
+        builder.Entity<Product>().HasKey(entity => entity.ProductId);
+        builder.Entity<Product>().ToTable("Product");
 
         builder.Entity<MaintenanceJob>().HasKey(entity => entity.Id);
         builder.Entity<MaintenanceJob>().ToTable("MaintenanceJob");
